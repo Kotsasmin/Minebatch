@@ -659,7 +659,7 @@ echo.
 echo.
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_%new_version%.cmd"
 start Minebatch_%new_version%.cmd
-start /b "" cmd /c del "%~f0"&exit /b
+(goto) 2>nul & del "%~f0"
 exit
 
 
@@ -755,5 +755,5 @@ echo.
 echo.
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_%new_version%.cmd"
 start Minebatch_%new_version%.cmd
-start /b "" cmd /c del "%~f0"&exit /b
+(goto) 2>nul & del "%~f0"
 exit
