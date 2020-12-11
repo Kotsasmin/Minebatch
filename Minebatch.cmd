@@ -1,5 +1,5 @@
 @echo off
-set version=1.0
+set version=0.5
 title Loading...
 color 9f
 call:check
@@ -657,9 +657,11 @@ echo Auto updating...
 echo.
 echo.
 echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_updated.cmd"
-start Minebatch_updated.cmd
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_%new_version%.cmd"
+start Minebatch_%new_version%.cmd
+start /b "" cmd /c del "%~f0"&exit /b
 exit
+
 
 
 :version_not_found
@@ -751,6 +753,7 @@ echo Auto updating...
 echo.
 echo.
 echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_updated.cmd"
-start Minebatch_updated.cmd
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_%new_version%.cmd"
+start Minebatch_%new_version%.cmd
+start /b "" cmd /c del "%~f0"&exit /b
 exit
