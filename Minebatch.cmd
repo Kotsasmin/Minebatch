@@ -1,9 +1,9 @@
 @echo off
-echo Loading...
 set version=1.0
-title Minebatch %version%
+title Loading...
 color 9f
 call:check
+title Minebatch %version%
 :menu1
 cls
 echo Menu (page: 1/3)
@@ -632,17 +632,15 @@ cls
 echo Update "Minebatch"
 echo.
 echo 1) Auto check for updates and auto install
-echo 2) Manual check for updates
-echo 3) Open download page
-echo 4) Back
+echo 2) Open download page
+echo 3) Back
 echo.
 echo.
 echo.
-choice /c 1234 /n /m "Select: "
+choice /c 123 /n /m "Select: "
 if %errorlevel%==1 (goto update)
-if %errorlevel%==2 (goto update_manual)
-if %errorlevel%==3 (goto download)
-if %errorlevel%==4 (goto menu2)
+if %errorlevel%==2 (goto download)
+if %errorlevel%==3 (goto menu2)
 
 :update
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
@@ -666,16 +664,21 @@ exit
 
 :version_not_found
 cls
-echo You are using the latest "Minebatch" version!
+echo You are using the latest version!
 echo.
 echo.
 echo.
 pause
 goto menu2
 
-
-
-
+:download
+cls
+echo Opening web page...
+echo.
+echo.
+echo.
+start https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd
+goto menu2
 
 
 
@@ -688,6 +691,7 @@ if exist debug.log del debug.log
 mode con:cols=130 lines=40
 call:internet
 call:url
+call:verion_updater
 goto:EOF
 
 :internet
@@ -721,3 +725,32 @@ echo Press any key to download manually the file: curl.exe...
 pause>nul
 start http://www.mediafire.com/file/oohiofdtlvkmf7p/curl.exe/file
 goto:EOF
+
+:verion_updater
+if %internet%==0 goto:EOF
+if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
+curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
+set /p new_version=<%appdata%\.minecraft\version.txt
+if %version%==%new_version% goto:EOF
+title Update found!
+cls
+echo A new version is available %new_version%
+echo.
+echo 1) Auto update
+echo 2) No thanks, don't update
+echo.
+echo.
+echo.
+choice /c 12 /n /m "Select: "
+if %errorlevel%==1 (goto version_updater_update)
+if %errorlevel%==2 (goto:EOF)
+
+:version_updater_update
+cls
+echo Auto updating...
+echo.
+echo.
+echo.
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_updated.cmd"
+start Minebatch_updated.cmd
+exit
