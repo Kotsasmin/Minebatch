@@ -627,6 +627,57 @@ start https://github.com/Kotsasmin/Minecraft-launcher-data/blob/master/64.dll?ra
 goto menu2
 
 
+:update
+cls
+echo Update "Minebatch"
+echo.
+echo 1) Auto check for updates and auto install
+echo 2) Manual check for updates
+echo 3) Open download page
+echo 4) Back
+echo.
+echo.
+echo.
+choice /c 1234 /n /m "Select: "
+if %errorlevel%==1 (goto update)
+if %errorlevel%==2 (goto update_manual)
+if %errorlevel%==3 (goto download)
+if %errorlevel%==4 (goto menu2)
+
+:update
+if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
+cls
+echo Checking for updates...
+echo.
+echo.
+echo.
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -o "%appdata%\.minecraft\version.txt"
+set /p new_version=<%appdata%\.minecraft\version.txt
+if %version%==%new_version% goto version_not_found
+cls
+echo Auto updating...
+echo.
+echo.
+echo.
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_updated.cmd"
+start Minebatch_updated.cmd
+exit
+
+
+:version_not_found
+cls
+echo You are using the latest "Minebatch" version!
+echo.
+echo.
+echo.
+pause
+goto menu2
+
+
+
+
+
+
 
 
 
@@ -649,7 +700,7 @@ goto:EOF
 cls
 echo You are not connected to the internet... You can still run "Minebatch",
 echo but you won't have the ability to download files and games from the internet
-echo or update "Minebatch".
+echo or auto update "Minebatch".
 echo.
 echo.
 echo.
