@@ -1,5 +1,5 @@
 @echo off
-set version=1.0
+set version=0.0.0.2
 title Loading...
 color 9f
 call:check
