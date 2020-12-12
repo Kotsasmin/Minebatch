@@ -700,6 +700,7 @@ if %errorlevel%==3 (goto form)
 if %errorlevel%==4 (goto menu2)
 
 :discord
+cls
 echo Discord
 echo.
 echo You can DM me on Discord, or you can just join mine Discord server.
