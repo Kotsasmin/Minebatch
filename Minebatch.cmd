@@ -682,7 +682,93 @@ echo.
 start https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd
 goto menu2
 
+:bug
+cls
+echo Really? Oh my god! Please, let me know about that bug! You can contact me with:
+echo.
+echo 1) Discord
+echo 2) E-mail
+echo 3) Fill an online form
+echo 4) Back
+echo.
+echo.
+echo.
+choice /c 1234 /n /m "Select: "
+if %errorlevel%==1 (goto discord)
+if %errorlevel%==2 (goto e-mail)
+if %errorlevel%==3 (goto form)
+if %errorlevel%==4 (goto menu2)
 
+:discord
+echo Discord
+echo.
+echo You can DM me on Discord, or you can just join mine Discord server.
+echo.
+echo 1) DM me
+echo 2) Join my server
+echo 3) Back
+echo.
+echo.
+echo.
+choice /c 123 /n /m "Select: "
+if %errorlevel%==1 (goto discord_dm)
+if %errorlevel%==2 (goto discord_server)
+if %errorlevel%==3 (goto bug)
+
+:discord_dm
+echo|set /p=Kotsasmin#9454|clip
+cls
+echo Discord DM
+echo.
+echo ID copied to clipboard, but here it is if you can't find it: Kotsasmin#9454
+echo.
+echo.
+echo.
+pause
+got bug
+
+:discord_server
+echo|set /p=https://discord.gg/KHvjMcKkEX|clip
+start https://discord.gg/KHvjMcKkEX
+cls
+echo Invite link copied to clipboard, but here it is if you can't find it: https://discord.gg/KHvjMcKkEX
+echo.
+echo.
+echo.
+pause
+goto bug
+
+:e-mail
+echo|set /p=kotsasmin@gmail.com|clip
+cls
+echo E-mail
+echo.
+echo My e-mail is now on clipboard but here it is if you can't find it: kotsasmin@gmail.com
+echo.
+echo.
+echo.
+pause
+goto bug
+
+
+:form
+cls
+echo Opening web page...
+echo.
+echo.
+echo.
+start https://forms.gle/xUKXpNnvkgBLBvct8
+goto bug
+
+
+
+
+
+
+:help1
+cls
+echo Help (page: 1/3)
+echo.
 
 
 
