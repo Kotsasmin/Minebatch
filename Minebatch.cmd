@@ -73,7 +73,7 @@ echo.
 echo.
 echo.
 choice /c 12345 /n /m "Select: "
-if %errorlevel%==1 (goto web)
+if %errorlevel%==1 (goto web1)
 if %errorlevel%==2 (goto credits)
 if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
@@ -726,7 +726,7 @@ echo.
 echo.
 echo.
 pause
-got bug
+goto bug
 
 :discord_server
 echo|set /p=https://discord.gg/KHvjMcKkEX|clip
@@ -761,15 +761,36 @@ echo.
 start https://forms.gle/xUKXpNnvkgBLBvct8
 goto bug
 
-
-
-
-
-
 :help1
 cls
 echo Help (page: 1/3)
 echo.
+exit
+
+
+:web1
+cls
+echo Web pages (page: 1/2)
+echo.
+echo 1) Kotsasmin's web page
+echo 2) copyitright's web page
+echo 3) TLauncher's web page
+echo 4) Rexdl's web page
+echo 5) Mc server soft's web page
+echo 6) Minecraft's web page
+echo 7) Java's web page
+echo 8) Page 2
+echo 9) Back
+choice /c 123456789 /n /m "Select: "
+if %errorlevel%==1 (start http://kotsasmin.blogspot.com & goto web)
+if %errorlevel%==2 (start https://www.playfreeminecraft.nl/ & goto web)
+if %errorlevel%==3 (start https://tlauncher.org/ & goto web)
+if %errorlevel%==4 (start https://rexdl.com/ & goto web)
+if %errorlevel%==5 (start https://www.mcserversoft.com/ & goto web)
+if %errorlevel%==6 (start https://www.minecraft.net/en-us/ & goto web)
+if %errorlevel%==7 (start https://www.java.com/en/ & goto web)
+if %errorlevel%==8 (goto web2)
+if %errorlevel%==9 (goto menu3)
 
 
 
