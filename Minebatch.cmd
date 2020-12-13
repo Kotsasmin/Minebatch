@@ -1,7 +1,7 @@
 @echo off
-set version=0.0.0.4.2
+set version=0.0.0.4.5
 title Minebatch %version%
-echo Loading Creating window ...
+echo Loading Creating window...
 color 9f
 call:check
 :menu1
@@ -767,8 +767,10 @@ echo Help
 echo.
 echo 1) General
 echo 2) How to...
-echo 3)
-exit
+echo 3) About games
+echo 5) Error message
+echo 6) Help for noobs
+goto menu2
 
 
 :web1
@@ -814,8 +816,75 @@ if %errorlevel%==3 (goto menu3)
 :credits
 cls
 echo     MINSProduction and Kotsasmin presents
-echo        in association with copyitright
-::timeout 3 /nobreak >nul
+timeout 5 /nobreak >nul
+echo       in association with copyitright
+timeout 5 /nobreak >nul
+cls
+echo                 Minebatch
+timeout 5 /nobreak >nul
+cls
+echo Main programmer: Kotsasmin
+timeout 1 /nobreak >nul
+echo.
+echo Assistants: Nickolasmin
+timeout 1 /nobreak >nul
+echo             Aggelosmin
+timeout 1 /nobreak >nul
+echo             copyitright
+timeout 1 /nobreak >nul
+echo.
+echo Testers: copyitright
+timeout 1 /nobreak >nul
+echo          Efitselou
+timeout 10 /nobreak >nul
+cls
+echo Curl commands and "curl.exe" file by copyitright
+timeout 1 /nobreak >nul
+echo.
+echo Updating system assistant: copyitright
+timeout 1 /nobreak >nul
+echo.
+echo Idea by Nickolasmin
+timeout 1 /nobreak >nul
+echo.
+echo Design and main menu by: Kotsasmin, Nickolasmin
+timeout 10 /nobreak >nul
+cls
+echo Websites and sources: Minecraft
+timeout 1 /nobreak >nul
+echo                       TLauncher
+timeout 1 /nobreak >nul
+echo                       Rexdl
+timeout 1 /nobreak >nul
+echo                       MC server soft
+timeout 1 /nobreak >nul
+echo                       uTorrent
+timeout 1 /nobreak >nul
+echo                       Java
+timeout 1 /nobreak >nul
+echo                       GitHub
+timeout 1 /nobreak >nul
+echo                       DirectX
+timeout 1 /nobreak >nul
+echo                       playfreeminecraft (copyitright)
+timeout 1 /nobreak >nul
+echo                       MediaFire
+timeout 10 /nobreak >nul
+cls
+echo Special thanks to One for supporting us!
+timeout 1 /nobreak >nul
+echo.
+echo Special thanks to GitHub and MediaFire for helping in online storage!
+timeout 5 /nobreak >nul
+cls
+echo Music by: Antimo and Welles - That's the Spirit
+timeout 5 /nobreak >nul
+cls
+echo Thank you for downloading Minebatch! Have a nice day!
+echo.
+echo.
+echo.
+pause
 goto menu3
 
 
@@ -891,6 +960,7 @@ echo Loading Gathering data ...
 if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
 mode con:cols=130 lines=40
+call:internet
 SystemInfo | Find "OS Name:" >tmp.txt
 Type tmp.txt | Find "10" >nul 2>&1  || (
   Del tmp.txt
@@ -900,20 +970,23 @@ Type tmp.txt | Find "10" >nul 2>&1  || (
 )
 
 Del tmp.txt
-call:internet
+if not exist %appdata%\.minecraft\sound.exe call:sound
+if not exist %appdata%\.minecraft\music.wav call:music
+%appdata%\.minecraft\sound.exe Play %appdata%\.minecraft\music.wav -1
 call:url
 call:verion_updater
 goto:EOF
 
 :internet
 cls
-echo Loading Checking internet connection ...
+echo Loading Checking internet connection...
 Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
 if %internet%==1 set mode=Online
 if %internet%==0 set mode=Offline
 title Minebatch %version% %mode%
 if %internet%==0 goto internet_error
+cls
 goto:EOF
 
 :internet_error
@@ -925,6 +998,7 @@ echo.
 echo.
 echo.
 pause
+cls
 goto:EOF
 
 :url
@@ -940,12 +1014,13 @@ echo.
 echo Press any key to download manually the file: curl.exe...
 pause>nul
 start http://www.mediafire.com/file/oohiofdtlvkmf7p/curl.exe/file
+cls
 goto:EOF
 
 :verion_updater
 cls
 if %internet%==0 goto:EOF
-echo Loading Checking for updates ...
+echo Loading Checking for updates...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
@@ -961,7 +1036,7 @@ echo.
 echo.
 choice /c 12 /n /m "Select: "
 if %errorlevel%==1 (goto version_updater_update)
-if %errorlevel%==2 (goto:EOF)
+if %errorlevel%==2 (cls & goto:EOF)
 
 :version_updater_update
 cls
@@ -983,3 +1058,26 @@ echo.
 echo.
 pause
 exit
+
+
+:sound
+if %internet%==0 goto:EOF
+cls
+echo Downloading sound.exe...
+echo.
+echo.
+echo.
+curl --connect-timeout 3 --progress-bar -f -k -L "https://github.com/Kotsasmin/Minebatch/blob/main/sound.exe?raw=true" -o "%appdata%\.minecraft\sound.exe"
+cls
+goto:EOF
+:music
+if %internet%==0 goto:EOF
+cls
+echo Downloading music...
+echo.
+echo.
+echo.
+curl --connect-timeout 3 --progress-bar -f -k -L "https://download1980.mediafire.com/s89mio538png/dfki1euaawb1t5r/music.wav" -o "%appdata%\.minecraft\music.wav"
+cls
+goto:EOF
+
