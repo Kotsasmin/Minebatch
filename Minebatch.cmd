@@ -1,8 +1,7 @@
 @echo off
-set version=0.0.0.4
+set version=0.0.0.4.2
 title Minebatch %version%
-echo Loading...
-echo Creating window...
+echo Loading Creating window ...
 color 9f
 call:check
 :menu1
@@ -888,11 +887,19 @@ goto menu3
 
 :check
 cls
-echo Loading...
-echo Gathering data...
+echo Loading Gathering data ...
 if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
 mode con:cols=130 lines=40
+SystemInfo | Find "OS Name:" >tmp.txt
+Type tmp.txt | Find "10" >nul 2>&1  || (
+  Del tmp.txt
+  goto win10
+  Pause 
+  Exit /B
+)
+
+Del tmp.txt
 call:internet
 call:url
 call:verion_updater
@@ -900,8 +907,7 @@ goto:EOF
 
 :internet
 cls
-echo Loading...
-echo Checking internet connection...
+echo Loading Checking internet connection ...
 Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
 if %internet%==1 set mode=Online
@@ -939,9 +945,7 @@ goto:EOF
 :verion_updater
 cls
 if %internet%==0 goto:EOF
-echo Loading...
-echo Checking for an update...
-if %internet%==0 goto:EOF
+echo Loading Checking for updates ...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
@@ -968,4 +972,14 @@ echo.
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/Minebatch.cmd" -o "Minebatch_%new_version%.cmd"
 start Minebatch_%new_version%.cmd
 (goto) 2>nul & del "%~f0"
+exit
+
+
+:win10
+cls
+echo You have to upgrade your system sto windows 10, or else the program won't be launched!
+echo.
+echo.
+echo.
+pause
 exit
