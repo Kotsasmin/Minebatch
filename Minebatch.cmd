@@ -821,6 +821,71 @@ goto menu3
 
 
 
+
+:clean
+cls
+echo Warning! Save and close all of your progresses before cleaning up your PC! Also,
+echo this will take a lot of time.
+echo.
+echo 1) Start cleaning up
+echo 2) Back
+echo.
+echo.
+echo.
+choice /c 12 /n /m "Select: "
+if %errorlevel%==1 (goto cleanup)
+if %errorlevel%==2 (goto menu3)
+
+:cleanup
+cls
+echo Starting cleaning up...
+echo.
+echo -----------------------
+echo.
+del /f /q "%userprofile%\Start Menu\Programs\Accessories\Program Compatibility Wizard.lnk">nul
+del /f /q "%userprofile%\Start Menu\Programs\Accessories\Tour Windows XP.lnk">nul
+rd /s /q "C:\Documents and Settings\All Users\Start Menu\Programs\Games\">nul
+del /f /q "%userprofile%\Start Menu\Programs\Outlook Express.lnk">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\Programs\MSN.lnk">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\Programs\Windows Messenger.lnk">nul
+del /f /q "%userprofile%\Start Menu\Programs\Remote Assistance.lnk">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\Set Program Access and Defaults.lnk">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\Windows Catalog.lnk">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\New Microsoft Office Document*">nul
+del /f /q "C:\Documents and Settings\All Users\Start Menu\Open Microsoft Office Document*">nul
+CD /d "C:\Documents and Settings\All Users\Desktop">nul
+del /f /q "Show Desktop*">nul
+CD /d "%userprofile%\Desktop">nul
+del /f /q "Show Desktop*">nul
+defrag C: -f
+defrag D: -f
+del /a /s /q %windir%\temp & md %windir%\temp>nul
+del /a /s /q %userprofile%\recent\*.*>nul
+del /a /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*">nul
+del /a /s /q "%userprofile%\Local Settings\Temp\*.*">nul
+del /a /s /q "%userprofile%\recent\*.*">nul
+del /a /s /q %systemdrive%\*.tmp>nul
+del /a /s /q %systemdrive%\*._mp>nul
+del /a /s /q %systemdrive%\*.log>nul
+del /a /s /q %systemdrive%\*.gid>nul
+del /a /s /q %systemdrive%\*.chk>nul
+del /a /s /q %systemdrive%\*.old>nul
+del /a /s /q %systemdrive%\recycled\*.*>nul
+del /a /s /q %windir%\*.bak>nul
+del /a /s /q %windir%\prefetch\*.*>nul
+echo.
+echo -----------------------
+echo.
+echo Cleaning up is complete!
+echo.
+echo.
+echo.
+timeout 5 /nobreak >nul
+pause
+goto menu3
+
+
+
 :check
 cls
 echo Loading...
