@@ -1,9 +1,10 @@
 @echo off
-set version=0.0.0.2
-title Loading...
+set version=0.0.0.3
+title Minebatch %version%
+echo Loading...
+echo Creating window...
 color 9f
 call:check
-title Minebatch %version%
 :menu1
 cls
 echo Menu (page: 1/3)
@@ -649,7 +650,7 @@ echo Checking for updates...
 echo.
 echo.
 echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -o "%appdata%\.minecraft\version.txt"
+curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto version_not_found
 cls
@@ -761,10 +762,13 @@ echo.
 start https://forms.gle/xUKXpNnvkgBLBvct8
 goto bug
 
-:help1
+:help
 cls
-echo Help (page: 1/3)
+echo Help
 echo.
+echo 1) General
+echo 2) How to...
+echo 3)
 exit
 
 
@@ -793,9 +797,34 @@ if %errorlevel%==8 (goto web2)
 if %errorlevel%==9 (goto menu3)
 
 
+:web2
+cls
+echo Web pages (page: 2/2)
+echo.
+echo 1) DirectX's web page
+echo 2) uTorrent's web page
+echo 3) Back
+echo.
+echo.
+echo.
+choice /c 123 /n /m "Select: "
+if %errorlevel%==1 (start https://www.microsoft.com/en-us/download/details.aspx?id=35 & goto web)
+if %errorlevel%==2 (start https://www.utorrent.com/ & goto web)
+if %errorlevel%==3 (goto menu3)
+
+:credits
+cls
+echo     MINSProduction and Kotsasmin presents
+echo        in association with copyitright
+::timeout 3 /nobreak >nul
+goto menu3
+
 
 
 :check
+cls
+echo Loading...
+echo Gathering data...
 if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
 mode con:cols=130 lines=40
@@ -805,8 +834,14 @@ call:verion_updater
 goto:EOF
 
 :internet
+cls
+echo Loading...
+echo Checking internet connection...
 Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
+if %internet%==1 set mode=Online
+if %internet%==0 set mode=Offline
+title Minebatch %version% %mode%
 if %internet%==0 goto internet_error
 goto:EOF
 
@@ -837,6 +872,9 @@ start http://www.mediafire.com/file/oohiofdtlvkmf7p/curl.exe/file
 goto:EOF
 
 :verion_updater
+cls
+echo Loading...
+echo Checking for an update...
 if %internet%==0 goto:EOF
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
