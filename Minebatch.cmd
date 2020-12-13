@@ -938,6 +938,7 @@ goto:EOF
 
 :verion_updater
 cls
+if %internet%==0 goto:EOF
 echo Loading...
 echo Checking for an update...
 if %internet%==0 goto:EOF
