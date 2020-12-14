@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.4.5
+set version=0.0.0.4.6
 title Minebatch %version%
 echo Loading Creating window...
 color 9f
@@ -964,9 +964,7 @@ call:internet
 SystemInfo | Find "OS Name:" >tmp.txt
 Type tmp.txt | Find "10" >nul 2>&1  || (
   Del tmp.txt
-  goto win10
-  Pause 
-  Exit /B
+  call:win10
 )
 
 Del tmp.txt
@@ -1052,12 +1050,12 @@ exit
 
 :win10
 cls
-echo You have to upgrade your system sto windows 10, or else the program won't be launched!
+echo You have to upgrade your system to windows 10, or else the program won't be work properly!
 echo.
 echo.
 echo.
 pause
-exit
+goto:EOF
 
 
 :sound
