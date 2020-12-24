@@ -1,6 +1,6 @@
 @echo off
-set version=0.0.0.4.6
-title Minebatch %version%
+set version=0.0.0.4.7
+title Minebatch %version% Loading...
 echo Loading Creating window...
 color 9f
 call:check
@@ -768,9 +768,46 @@ echo.
 echo 1) General
 echo 2) How to...
 echo 3) About games
-echo 5) Error message
-echo 6) Help for noobs
-goto menu2
+echo 4) Error message
+echo 5) Help for noobs
+echo 6) Back
+echo.
+echo.
+echo.
+choice /c 123456 /n /m "Select: "
+if %errorlevel%==1 (goto general_help)
+if %errorlevel%==2 (goto how_to)
+if %errorlevel%==3 (goto about)
+if %errorlevel%==4 (goto error_help)
+if %errorlevel%==5 (goto noobs)
+if %errorlevel%==6 (goto menu2)
+
+:general_help
+cls
+echo General help
+echo.
+echo 1) What is Minebatch?
+echo 2) Who am I?
+echo 3) Can I edit/share the code of "Minebatch"?
+echo 4) I have an idea about "Minebatch, how can I sent it to you?
+echo 5) What games can I play?
+echo 6) A game or a program is not working!
+echo 7) What is DirectX and where can I use it?
+echo 8) What is opengl and what is its use?
+echo 9) Back
+choice /c 123456789 /n /m "Select: "
+if %errorlevel%==1 (goto what_is)
+if %errorlevel%==2 (goto who_am_i)
+if %errorlevel%==3 (goto licence)
+if %errorlevel%==4 (goto idea)
+if %errorlevel%==5 (goto what_games)
+if %errorlevel%==6 (goto not_working_game)
+if %errorlevel%==7 (goto directx_help)
+if %errorlevel%==8 (goto torrent_help)
+if %errorlevel%==9 (goto help)
+
+
+
 
 
 :web1
@@ -844,7 +881,7 @@ echo.
 echo Updating system assistant: copyitright
 timeout 1 /nobreak >nul
 echo.
-echo Idea by Nickolasmin
+echo Idea by: Nickolasmin
 timeout 1 /nobreak >nul
 echo.
 echo Design and main menu by: Kotsasmin, Nickolasmin
@@ -961,18 +998,12 @@ if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
 mode con:cols=130 lines=40
 call:internet
-SystemInfo | Find "OS Name:" >tmp.txt
-Type tmp.txt | Find "10" >nul 2>&1  || (
-  Del tmp.txt
-  call:win10
-)
-
-Del tmp.txt
-if not exist %appdata%\.minecraft\sound.exe call:sound
-if not exist %appdata%\.minecraft\music.wav call:music
-%appdata%\.minecraft\sound.exe Play %appdata%\.minecraft\music.wav -1
+::if not exist %appdata%\.minecraft\sound.exe call:sound
+::if not exist %appdata%\.minecraft\music.wav call:music
 call:url
 call:verion_updater
+:: %appdata%\.minecraft\sound.exe Play %appdata%\.minecraft\music.wav -1
+title Minebatch %version% %mode%
 goto:EOF
 
 :internet
@@ -982,7 +1013,7 @@ Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
 if %internet%==1 set mode=Online
 if %internet%==0 set mode=Offline
-title Minebatch %version% %mode%
+title Minebatch %version% %mode% Loading...
 if %internet%==0 goto internet_error
 cls
 goto:EOF
@@ -1023,7 +1054,7 @@ if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto:EOF
-title Update found!
+title Minebatch %version% %mode% Update found!
 cls
 echo A new version is available %new_version%
 echo.
@@ -1048,16 +1079,6 @@ start Minebatch_%new_version%.cmd
 exit
 
 
-:win10
-cls
-echo You have to upgrade your system to windows 10, or else the program won't be work properly!
-echo.
-echo.
-echo.
-pause
-goto:EOF
-
-
 :sound
 if %internet%==0 goto:EOF
 cls
@@ -1075,7 +1096,7 @@ echo Downloading music...
 echo.
 echo.
 echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://download1980.mediafire.com/s89mio538png/dfki1euaawb1t5r/music.wav" -o "%appdata%\.minecraft\music.wav"
+curl --connect-timeout 3 --progress-bar -f -k -L "https://download1980.mediafire.com/2dfvqeuwkpkg/dfki1euaawb1t5r/music.wav" -o "%appdata%\.minecraft\music.wav"
 cls
 goto:EOF
 
