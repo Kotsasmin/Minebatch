@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.4.9
+set version=0.0.0.5.0
 title Minebatch %version% Loading...
 echo Loading Creating window...
 color 9f
@@ -883,6 +883,25 @@ goto menu3
 
 
 
+:contact
+cls
+echo Contact (copy)
+echo.
+echo 1) My e-mail: kotsasmin@gmail.com
+echo 2) My Discord server: https://discord.gg/KHvjMcKkEX
+echo 3) My Discord ID: Kotsasmin#9454
+echo 4) My website: kotsasmin.blogspot.com
+echo 5) Back
+echo.
+echo.
+echo.
+choice /c 12345 /n /m "Select: "
+if %errorlevel%==1 (echo|set /p=kotsasmin@gmail.com|clip)
+if %errorlevel%==2 (echo|set /p=https://discord.gg/KHvjMcKkEX|clip)
+if %errorlevel%==3 (echo|set /p=Kotsasmin#9454|clip)
+if %errorlevel%==4 (echo|set /p=kotsasmin.blogspot.com|clip)
+if %errorlevel%==5 (goto menu3)
+goto contact
 
 :clean
 cls
