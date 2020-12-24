@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.4.7
+set version=0.0.0.4.9
 title Minebatch %version% Loading...
 echo Loading Creating window...
 color 9f
@@ -8,13 +8,13 @@ call:check
 cls
 echo Menu (page: 1/3)
 echo.
-echo 1) Minecraft (5/5)
-echo 2) Minecraft Dungeons (2/5)
-echo 3) Minecraft Story Mode Season 1 (4/5)
-echo 4) Minecraft Story Mode Season 2 (4/5)
-echo 5) Minecraft Pocket Edition (2/5)
-echo 6) TLauncher (4/5)
-echo 7) Minecraft server soft (4/5)
+echo 1) Minecraft
+echo 2) TLauncher
+echo 3) Minecraft Dungeons
+echo 4) Minecraft Story Mode Season 1
+echo 5) Minecraft Story Mode Season 2
+echo 6) Minecraft Pocket Edition
+echo 7) Minecraft server soft
 echo 8) Page 2
 echo 9) Exit
 echo.
@@ -37,15 +37,15 @@ if %errorlevel%==9 (exit)
 cls
 echo Menu (page: 2/3)
 echo.
-echo 1) Java (5/5)
-echo 2) DirectX (4/5)
-echo 3) uTorrent (5/5)
-echo 4) opengl (2/5)
+echo 1) Java
+echo 2) DirectX
+echo 3) uTorrent
+echo 4) opengl
 echo 5) Update "Minebatch"
-echo 6) Help
-echo 7) Found a bug or a broken link?
-echo 8) Page 1
-echo 9) Page 3
+echo 6) Found a bug or a broken link?
+echo 7) Page 1
+echo 8) Page 3
+echo 9) Exit
 echo.
 echo.
 echo.
@@ -55,10 +55,10 @@ if %errorlevel%==2 (goto dirX)
 if %errorlevel%==3 (goto torrent)
 if %errorlevel%==4 (goto open)
 if %errorlevel%==5 (goto update)
-if %errorlevel%==6 (goto help)
-if %errorlevel%==7 (goto bug)
-if %errorlevel%==8 (goto menu1)
-if %errorlevel%==9 (goto menu3)
+if %errorlevel%==6 (goto bug)
+if %errorlevel%==7 (goto menu1)
+if %errorlevel%==8 (goto menu3)
+if %errorlevel%==9 (exit)
 
 :menu3
 cls
@@ -69,22 +69,24 @@ echo 2) Credits
 echo 3) Contact and info
 echo 4) Clean-up system
 echo 5) Page 2
+echo 6) Exit
 echo.
 echo.
 echo.
-choice /c 12345 /n /m "Select: "
+choice /c 123456 /n /m "Select: "
 if %errorlevel%==1 (goto web1)
 if %errorlevel%==2 (goto credits)
 if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
 if %errorlevel%==5 (goto menu2)
+if %errorlevel%==6 (exit)
 
 
 
 
 :mc
 cls
-echo Minecraft (5/5)
+echo Minecraft
 echo.
 echo 1) Auto download/install/launch
 echo 2) Manual download
@@ -133,7 +135,7 @@ goto menu1
 
 :dun
 cls
-echo Minecraft Dungeons (2/5)
+echo Minecraft Dungeons
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -168,7 +170,7 @@ start https://tlauncher.org/download/10524 & goto menu1
 
 :mcsm
 cls
-echo Minecraft Story Mode Season 1 (4/5)
+echo Minecraft Story Mode Season 1
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -204,7 +206,7 @@ start https://tlauncher.org/download/3494 & goto menu1
 
 :mcsm2
 cls
-echo Minecraft Story Mode Season 2 (4/5)
+echo Minecraft Story Mode Season 2
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -240,15 +242,15 @@ start https://tlauncher.org/download/4585 & goto menu1
 
 :mcpe
 cls
-echo Minecraft Pocket Edition (2/5)
+echo Minecraft Pocket Edition
 echo.
 echo Minecraft Pocket Edition has two versions: Mod 1 and Mod 2.
 echo.
 echo.
 echo 1) Mod 1 includes: Unlocked premium skins - Unlocked premium textures
 echo 2) Mod 2 includes: Unlocked premium skins - Unlocked premium textures 
-echo No damage mod - Unlimited breath - Max Inventory Size - ONE hit kill with weapons 
-echo Max score - Indestructible Tools
+echo 	No damage mod - Unlimited breath - Max Inventory Size - ONE hit kill with weapons 
+echo 	Max score - Indestructible Tools
 echo 3) Back
 echo.
 echo.
@@ -261,7 +263,7 @@ if %errorlevel%==3 (goto menu1)
 
 :mcpe1
 cls
-echo Minecraft Pocket Edition (Mod 1) (2/5)
+echo Minecraft Pocket Edition (Mod 1)
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -277,7 +279,7 @@ if %errorlevel%==3 (goto mcpe)
 
 :mcpe2
 cls
-echo Minecraft Pocket Edition (Mod 2) (2/5)
+echo Minecraft Pocket Edition (Mod 2)
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -344,7 +346,7 @@ goto menu!
 
 :tl
 cls
-echo TLauncher (4/5)
+echo TLauncher
 echo.
 echo 1) Auto download/install/launch
 echo 2) Manual download
@@ -397,7 +399,7 @@ goto menu1
 
 :mcss
 cls
-echo Minecraft server soft (4/5)
+echo Minecraft server soft
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -435,7 +437,7 @@ goto menu1
 
 :java
 cls
-echo Java (5/5)
+echo Java
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -472,7 +474,7 @@ goto menu2
 
 :dirX
 cls
-echo DirectX (4/5)
+echo DirectX
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -508,7 +510,7 @@ goto menu2
 
 :torrent
 cls
-echo uTorrent (5/5)
+echo uTorrent
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -546,7 +548,7 @@ goto menu2
 
 :open
 cls
-echo opengl (2/5)
+echo opengl
 echo.
 echo 1) 32-bit
 echo 2) 64-bit
@@ -561,7 +563,7 @@ if %errorlevel%==3 (goto menu2)
 
 :open32
 cls
-echo opengl (32-bit) (2/5)
+echo opengl (32-bit)
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -594,7 +596,7 @@ goto menu2
 
 :open64
 cls
-echo opengl (64-bit) (2/5)
+echo opengl (64-bit)
 echo.
 echo 1) Auto download
 echo 2) Manual download
@@ -760,51 +762,6 @@ echo.
 echo.
 start https://forms.gle/xUKXpNnvkgBLBvct8
 goto bug
-
-:help
-cls
-echo Help
-echo.
-echo 1) General
-echo 2) How to...
-echo 3) About games
-echo 4) Error message
-echo 5) Help for noobs
-echo 6) Back
-echo.
-echo.
-echo.
-choice /c 123456 /n /m "Select: "
-if %errorlevel%==1 (goto general_help)
-if %errorlevel%==2 (goto how_to)
-if %errorlevel%==3 (goto about)
-if %errorlevel%==4 (goto error_help)
-if %errorlevel%==5 (goto noobs)
-if %errorlevel%==6 (goto menu2)
-
-:general_help
-cls
-echo General help
-echo.
-echo 1) What is Minebatch?
-echo 2) Who am I?
-echo 3) Can I edit/share the code of "Minebatch"?
-echo 4) I have an idea about "Minebatch, how can I sent it to you?
-echo 5) What games can I play?
-echo 6) A game or a program is not working!
-echo 7) What is DirectX and where can I use it?
-echo 8) What is opengl and what is its use?
-echo 9) Back
-choice /c 123456789 /n /m "Select: "
-if %errorlevel%==1 (goto what_is)
-if %errorlevel%==2 (goto who_am_i)
-if %errorlevel%==3 (goto licence)
-if %errorlevel%==4 (goto idea)
-if %errorlevel%==5 (goto what_games)
-if %errorlevel%==6 (goto not_working_game)
-if %errorlevel%==7 (goto directx_help)
-if %errorlevel%==8 (goto torrent_help)
-if %errorlevel%==9 (goto help)
 
 
 
