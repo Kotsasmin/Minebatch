@@ -1,2 +1,3 @@
 + Added news.txt
 + Added message.txt
++ Fixed some bugs
