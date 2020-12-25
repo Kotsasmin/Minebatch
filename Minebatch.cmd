@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.5.3
+set version=0.0.0.5.4
 title Minebatch %version%
 echo Loading...
 color 9f
@@ -764,9 +764,6 @@ start https://forms.gle/xUKXpNnvkgBLBvct8
 goto bug
 
 
-
-
-
 :web1
 cls
 echo Web pages (page: 1/2)
@@ -1031,8 +1028,18 @@ curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kots
 timeout 2 /nobreak >nul
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto:EOF
+if exist %appdata%\.minecraft\news.txt del %appdata%\.minecraft\news.txt
+timeout 2 /nobreak >nul
+curl -o %appdata%\.minecraft\news.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/news.txt" -L -s
 cls
 echo A new version is available %new_version%
+echo.
+echo What's new:
+echo -----------------------------------------
+echo.
+type %appdata%\.minecraft\news.txt
+echo.
+echo -----------------------------------------
 echo.
 echo 1) Auto update
 echo 2) No thanks, don't update
