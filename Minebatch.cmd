@@ -68,8 +68,9 @@ echo 1) Wep pages
 echo 2) Credits
 echo 3) Contact and info
 echo 4) Clean-up system
-echo 5) Page 2
-echo 6) Exit
+echo 5) Kotsasmin's message
+echo 6) Page 2
+echo 7) Exit
 echo.
 echo.
 echo.
@@ -78,8 +79,29 @@ if %errorlevel%==1 (goto web1)
 if %errorlevel%==2 (goto credits)
 if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
-if %errorlevel%==5 (goto menu2)
-if %errorlevel%==6 (exit)
+if %errorlevel%==5 (call:message)
+if %errorlevel%==6 (goto menu2)
+if %errorlevel%==7 (exit)
+
+
+:message
+cls
+if %internet%==0 goto:EOF
+echo Downloading the message...
+echo.
+echo.
+echo.
+if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
+timeout 2 /nobreak >nul
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
+cls
+echo ----------------- Kotsasmin's message -----------------
+echo.
+type %appdata%\.minecraft\message.txt
+echo.
+echo -------------------------------------------------------
+pause>nul
+goto:EOF
 
 
 :mc
@@ -970,7 +992,7 @@ echo Loading...
 echo Gathering data ...
 if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
-mode con:cols=130 lines=40
+mode con:cols=130 lines=50
 call:internet
 call:url
 call:verion_updater
