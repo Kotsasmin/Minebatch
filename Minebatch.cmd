@@ -1026,8 +1026,9 @@ if %internet%==0 goto:EOF
 echo Loading...
 echo Checking for updates...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
-timeout 3 /nobreak >nul
+timeout 2 /nobreak >nul
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
+timeout 2 /nobreak >nul
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto:EOF
 cls
