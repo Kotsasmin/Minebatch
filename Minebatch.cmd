@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.5.1
+set version=0.0.0.5.2
 title Minebatch %version%
 echo Loading...
 color 9f
