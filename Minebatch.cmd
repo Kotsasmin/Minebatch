@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.5.6
+set version=0.0.0.5.7
 title Minebatch %version%
 echo Loading...
 color 9f
@@ -101,7 +101,7 @@ type %appdata%\.minecraft\message.txt
 echo.
 echo -------------------------------------------------------
 pause>nul
-goto:EOF
+goto menu3
 
 
 :mc
