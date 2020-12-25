@@ -1,7 +1,7 @@
 @echo off
 set version=0.0.0.5.1
-title Minebatch %version% Loading...
-echo Loading Creating window...
+title Minebatch %version%
+echo Loading...
 color 9f
 call:check
 :menu1
@@ -649,6 +649,8 @@ echo Checking for updates...
 echo.
 echo.
 echo.
+if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
+timeout 3 /nobreak >nul
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto version_not_found
@@ -967,27 +969,25 @@ goto menu3
 
 :check
 cls
-echo Loading Gathering data ...
+echo Loading...
+echo Gathering data ...
 if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
 if exist debug.log del debug.log
 mode con:cols=130 lines=40
 call:internet
-::if not exist %appdata%\.minecraft\sound.exe call:sound
-::if not exist %appdata%\.minecraft\music.wav call:music
 call:url
 call:verion_updater
-:: %appdata%\.minecraft\sound.exe Play %appdata%\.minecraft\music.wav -1
 title Minebatch %version% %mode%
 goto:EOF
 
 :internet
 cls
-echo Loading Checking internet connection...
+echo Loading...
+echo Checking internet connection...
 Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
 if %internet%==1 set mode=Online
 if %internet%==0 set mode=Offline
-title Minebatch %version% %mode% Loading...
 if %internet%==0 goto internet_error
 cls
 goto:EOF
@@ -1023,12 +1023,13 @@ goto:EOF
 :verion_updater
 cls
 if %internet%==0 goto:EOF
-echo Loading Checking for updates...
+echo Loading...
+echo Checking for updates...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
+timeout 3 /nobreak >nul
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto:EOF
-title Minebatch %version% %mode% Update found!
 cls
 echo A new version is available %new_version%
 echo.
@@ -1051,26 +1052,4 @@ curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.
 start Minebatch_%new_version%.cmd
 (goto) 2>nul & del "%~f0"
 exit
-
-
-:sound
-if %internet%==0 goto:EOF
-cls
-echo Downloading sound.exe...
-echo.
-echo.
-echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://github.com/Kotsasmin/Minebatch/blob/main/sound.exe?raw=true" -o "%appdata%\.minecraft\sound.exe"
-cls
-goto:EOF
-:music
-if %internet%==0 goto:EOF
-cls
-echo Downloading music...
-echo.
-echo.
-echo.
-curl --connect-timeout 3 --progress-bar -f -k -L "https://download1980.mediafire.com/2dfvqeuwkpkg/dfki1euaawb1t5r/music.wav" -o "%appdata%\.minecraft\music.wav"
-cls
-goto:EOF
 
