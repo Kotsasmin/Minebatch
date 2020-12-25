@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.5.0
+set version=0.0.0.5.1
 title Minebatch %version% Loading...
 echo Loading Creating window...
 color 9f
@@ -22,11 +22,11 @@ echo.
 echo.
 choice /c 123456789 /n /m "Select: "
 if %errorlevel%==1 (goto mc)
-if %errorlevel%==2 (goto dun)
-if %errorlevel%==3 (goto mcsm)
-if %errorlevel%==4 (goto mcsm2)
-if %errorlevel%==5 (goto mcpe)
-if %errorlevel%==6 (goto tl)
+if %errorlevel%==2 (goto tl)
+if %errorlevel%==3 (goto dun)
+if %errorlevel%==4 (goto mcsm1)
+if %errorlevel%==5 (goto mcsm2)
+if %errorlevel%==6 (goto mcpe)
 if %errorlevel%==7 (goto mcss)
 if %errorlevel%==8 (goto menu2)
 if %errorlevel%==9 (exit)
@@ -80,8 +80,6 @@ if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
 if %errorlevel%==5 (goto menu2)
 if %errorlevel%==6 (exit)
-
-
 
 
 :mc
