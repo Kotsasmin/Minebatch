@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.5.8
+set version=0.0.0.5.9
 title Minebatch %version%
 echo Loading...
 color 9f
@@ -70,19 +70,67 @@ echo 2) Credits
 echo 3) Contact and info
 echo 4) Clean-up system
 echo 5) Kotsasmin's news
-echo 6) Page 2
-echo 7) Exit
+echo 6) Extras for Minecraft Story Mode Seasons 1-2
+echo 7) Page 2
+echo 8) Exit
 echo.
 echo.
 echo.
-choice /c 123456 /n /m "Select: "
+choice /c 12345678 /n /m "Select: "
 if %errorlevel%==1 (goto web1)
 if %errorlevel%==2 (goto credits)
 if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
 if %errorlevel%==5 (call:message)
-if %errorlevel%==6 (goto menu2)
-if %errorlevel%==7 (exit)
+if %errorlevel%==6 (goto extra)
+if %errorlevel%==7 (goto menu2)
+if %errorlevel%==8 (exit)
+
+
+:extra
+if %internet%==0 goto:EOF
+cls
+echo Downloading extras...
+echo.
+echo.
+echo.
+curl -o %appdata%\.minecraft\vc_redist.x64.exe "https://github.com/Kotsasmin/Minebatch/blob/main/vc_redist.x64.exe?raw=true" -L -s
+curl -o %appdata%\.minecraft\vc_redist.x86.exe "https://github.com/Kotsasmin/Minebatch/blob/main/vc_redist.x86.exe?raw=true" -L -s
+curl -o %appdata%\.minecraft\directX_mcsm.exe "https://github.com/Kotsasmin/Minebatch/blob/main/DirectX%20Web%20setup.exe?raw=true" -L -s
+curl -o %appdata%\.minecraft\directXweb.exe "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" -L -s
+cls
+echo Installing extras...
+echo.
+echo.
+echo.
+cmd /C start /wait %appdata%\.minecraft\vc_redist.x64.exe
+cls
+echo Installing extras...
+echo.
+echo.
+echo.
+cmd /C start /wait %appdata%\.minecraft\vc_redist.x86.exe
+cls
+echo Installing extras...
+echo.
+echo.
+echo.
+cmd /C start /wait %appdata%\.minecraft\directX_mcsm.exe
+cls
+echo Installing extras...
+echo.
+echo.
+echo.
+cmd /C start /wait %appdata%\.minecraft\directXweb.exe
+cls
+echo Installation complete!
+echo.
+echo.
+echo.
+pause
+goto:EOF
+
+
 
 
 :message
@@ -1097,7 +1145,7 @@ echo.
 echo.
 if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
 timeout 2 /nobreak >nul
-curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
+curl -o %appdata%\.minecraft\message.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -L -s
 cls
 echo ----------------- Kotsasmin's daily news -----------------
 echo.
