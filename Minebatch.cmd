@@ -96,7 +96,7 @@ if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
 timeout 2 /nobreak >nul
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
 cls
-echo -------------------- Kotsasmin's news --------------------
+echo ----------------- Kotsasmin's news -----------------------
 echo.
 type %appdata%\.minecraft\message.txt
 echo.
@@ -1099,7 +1099,7 @@ if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
 timeout 2 /nobreak >nul
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
 cls
-echo -------------------- Kotsasmin's news --------------------
+echo ----------------- Kotsasmin's daily news -----------------
 echo.
 type %appdata%\.minecraft\message.txt
 echo.
