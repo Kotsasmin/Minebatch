@@ -1,9 +1,10 @@
 @echo off
-set version=0.0.0.5.7
+set version=0.0.0.5.8
 title Minebatch %version%
 echo Loading...
 color 9f
 call:check
+call:daily_news
 :menu1
 cls
 echo Menu (page: 1/3)
@@ -68,7 +69,7 @@ echo 1) Wep pages
 echo 2) Credits
 echo 3) Contact and info
 echo 4) Clean-up system
-echo 5) Kotsasmin's message
+echo 5) Kotsasmin's news
 echo 6) Page 2
 echo 7) Exit
 echo.
@@ -95,11 +96,14 @@ if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
 timeout 2 /nobreak >nul
 curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
 cls
-echo ----------------- Kotsasmin's message -----------------
+echo -------------------- Kotsasmin's news --------------------
 echo.
 type %appdata%\.minecraft\message.txt
 echo.
-echo -------------------------------------------------------
+echo ----------------------------------------------------------
+echo.
+echo.
+echo.
 pause>nul
 goto menu3
 
@@ -1083,3 +1087,25 @@ start Minebatch_%new_version%.cmd
 (goto) 2>nul & del "%~f0"
 exit
 
+:daily_news
+if %internet%==0 goto:EOF
+cls
+echo Loading...
+echo Daily news...
+echo.
+echo.
+echo.
+if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
+timeout 2 /nobreak >nul
+curl --connect-timeout 3 --progress-bar -f -k -L "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -o "%appdata%\.minecraft\message.txt"
+cls
+echo -------------------- Kotsasmin's news --------------------
+echo.
+type %appdata%\.minecraft\message.txt
+echo.
+echo ----------------------------------------------------------
+echo.
+echo.
+echo.
+pause
+goto:EOF
