@@ -1060,7 +1060,7 @@ curl -o %appdata%\.minecraft\news.txt "https://raw.githubusercontent.com/Kotsasm
 cls
 echo A new version is available %new_version%
 echo.
-echo What's new:
+echo What's new in %new_version%:
 echo -----------------------------------------
 echo.
 type %appdata%\.minecraft\news.txt
