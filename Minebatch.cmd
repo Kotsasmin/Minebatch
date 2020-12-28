@@ -1,10 +1,9 @@
 @echo off
-set version=0.0.0.5.9
+set version=0.0.0.6.0
 title Minebatch %version%
 echo Loading...
 color 9f
 call:check
-call:daily_news
 :menu1
 cls
 echo Menu (page: 1/3)
@@ -71,20 +70,153 @@ echo 3) Contact and info
 echo 4) Clean-up system
 echo 5) Kotsasmin's news
 echo 6) Extras for Minecraft Story Mode Seasons 1-2
-echo 7) Page 2
-echo 8) Exit
+echo 7) Options
+echo 8) Page 2
+echo 9) Exit
 echo.
 echo.
 echo.
-choice /c 12345678 /n /m "Select: "
+choice /c 123456789 /n /m "Select: "
 if %errorlevel%==1 (goto web1)
 if %errorlevel%==2 (goto credits)
 if %errorlevel%==3 (goto contact)
 if %errorlevel%==4 (goto clean)
 if %errorlevel%==5 (call:message)
 if %errorlevel%==6 (goto extra)
-if %errorlevel%==7 (goto menu2)
-if %errorlevel%==8 (exit)
+if %errorlevel%==7 (goto options)
+if %errorlevel%==8 (goto menu2)
+if %errorlevel%==9 (exit)
+
+:options
+cls
+echo Options
+echo.
+echo 1) Uninstall .minecraft
+echo 2) Factory reset
+echo 3) Toggle automatic updates on startup
+echo 4) Toggle daily news on startup
+echo 5) Back
+echo.
+echo.
+echo.
+choice /c 12345 /n /m "Select: "
+if %errorlevel%==1 (goto uninstall)
+if %errorlevel%==2 (goto reset)
+if %errorlevel%==3 (goto change_auto_updates)
+if %errorlevel%==4 (goto change_news)
+if %errorlevel%==5 (goto menu3)
+
+:reset
+if not exist %appdata%\.minecraft\select.txt call:options_make
+(
+echo 1
+echo 1
+)>%appdata%\.minecraft\select.txt
+goto options
+
+:change_news
+cls
+echo Toggle daily news on startup
+echo.
+echo 1) On
+echo 2) Off
+echo 3) Back
+echo.
+echo.
+echo.
+choice /c 123 /n /m "Select: "
+if %errorlevel%==1 (goto on_news)
+if %errorlevel%==2 (goto off_news)
+if %errorlevel%==3 (goto options)
+
+:on_news
+if not exist %appdata%\.minecraft\select.txt call:options_make
+(
+set /p update_start=
+set /p news_start=
+)<%appdata%\.minecraft\select.txt
+(
+echo %update_start%
+echo 1
+)>%appdata%\.minecraft\select.txt
+goto options
+
+:off_news
+if not exist %appdata%\.minecraft\select.txt call:options_make
+(
+set /p update_start=
+set /p news_start=
+)<%appdata%\.minecraft\select.txt
+(
+echo %update_start%
+echo 0
+)>%appdata%\.minecraft\select.txt
+goto options
+
+:change_auto_updates
+cls
+echo Toggle automatic updates on startup
+echo.
+echo 1) On
+echo 2) Off
+echo 3) Back
+echo.
+echo.
+echo.
+choice /c 123 /n /m "Select: "
+if %errorlevel%==1 (goto on_update)
+if %errorlevel%==2 (goto off_update)
+if %errorlevel%==3 (goto options)
+
+:on_update
+if not exist %appdata%\.minecraft\select.txt call:options_make
+(
+set /p update_start=
+set /p news_start=
+)<%appdata%\.minecraft\select.txt
+(
+echo 1
+echo %news_start%
+)>%appdata%\.minecraft\select.txt
+goto options
+
+:off_update
+if not exist %appdata%\.minecraft\select.txt call:options_make
+(
+set /p update_start=
+set /p news_start=
+)<%appdata%\.minecraft\select.txt
+(
+echo 0
+echo %news_start%
+)>%appdata%\.minecraft\select.txt
+goto options
+
+
+
+:uninstall
+cls
+echo Warning! This will delete all of your data! Your games, files, settings will be
+echo deleted! Minecraft, TLauncher and all of the files in "%appdata%\.minecraft" will be deleted!
+echo Except from Minebatch data and settings.
+echo.
+echo 1) Do the uninstallation
+echo 2) Back
+echo.
+echo.
+echo.
+choice /c 12 /n /m "Select: "
+if %errorlevel%==1 (goto uninstall_start)
+if %errorlevel%==2 (goto options)
+
+:uninstall_start
+cls
+echo Deleting files...
+echo.
+echo.
+echo.
+if exist %appdata%\.minecraft @RD /S /Q "%appdata%\.minecraft"
+goto options
 
 
 :extra
@@ -1036,18 +1168,30 @@ timeout 5 /nobreak >nul
 pause
 goto menu3
 
+:options_make
+(
+echo 1
+echo 1
+)>%appdata%\.minecraft\select.txt
+goto:EOF
 
 
 :check
 cls
 echo Loading...
 echo Gathering data ...
-if not exist %appdata%\.minecraft mkdir %appdata%\.minecraft
+if not exist %appdata%\.minecraft call:install
+if not exist %appdata%\.minecraft\select.txt call:options_make
 if exist debug.log del debug.log
 mode con:cols=130 lines=50
 call:internet
 call:url
+(
+set /p update_start=
+set /p news_start=
+)<%appdata%\.minecraft\select.txt
 call:verion_updater
+call:daily_news
 title Minebatch %version% %mode%
 goto:EOF
 
@@ -1092,8 +1236,9 @@ cls
 goto:EOF
 
 :verion_updater
-cls
 if %internet%==0 goto:EOF
+if %update_start%==0 goto:EOF
+cls
 echo Loading...
 echo Checking for updates...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
@@ -1137,6 +1282,7 @@ exit
 
 :daily_news
 if %internet%==0 goto:EOF
+if %news_start%==0 goto:EOF
 cls
 echo Loading...
 echo Daily news...
@@ -1156,4 +1302,15 @@ echo.
 echo.
 echo.
 pause
+goto:EOF
+
+:install
+cls
+echo Loading...
+echo Creating files...
+echo.
+echo.
+echo.
+mkdir %appdata%\.minecraft
+call:options_make
 goto:EOF
