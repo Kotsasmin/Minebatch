@@ -1175,7 +1175,8 @@ goto:EOF
 
 
 :loading
-set load=%load%ΫΫ
+::set load=%load%ΫΫ
+set load=%load%[]
 cls
 echo Loading... 
 echo Please Wait...
@@ -1185,9 +1186,11 @@ echo.
 echo.
 echo Progress:
 echo.
-echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+::echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+echo ------------------------------------------
 echo %load%
-echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+echo ------------------------------------------
+::echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
 set/a loadnum=%loadnum% +1
 if %loadnum%==21 goto menu1
 if %ready%==1 goto loading
@@ -1199,7 +1202,7 @@ goto:EOF
 color 9f
 set load=
 set/a loadnum=0
-set st=Δ
+::set st=Δ
 set/a ready=0
 set progress_text=Gathering data
 call:loading
