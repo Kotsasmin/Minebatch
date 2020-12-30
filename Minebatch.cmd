@@ -1,9 +1,7 @@
 @echo off
-set version=0.0.0.6.0
+set version=0.0.0.6.1
 title Minebatch %version%
-echo Loading...
-color 9f
-call:check
+goto check
 :menu1
 cls
 echo Menu (page: 1/3)
@@ -1176,29 +1174,63 @@ echo 1
 goto:EOF
 
 
-:check
+:loading
+set load=%load%ΫΫ
 cls
-echo Loading...
-echo Gathering data ...
+echo Loading... 
+echo Please Wait...
+echo.
+echo Status: %progress_text%...
+echo.
+echo.
+echo Progress:
+echo.
+echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+echo %load%
+echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+set/a loadnum=%loadnum% +1
+if %loadnum%==21 goto menu1
+if %ready%==1 goto loading
+goto:EOF
+
+
+
+:check
+color 9f
+set load=
+set/a loadnum=0
+set st=Δ
+set/a ready=0
+set progress_text=Gathering data
+call:loading
 if not exist %appdata%\.minecraft call:install
+call:loading
 if not exist %appdata%\.minecraft\select.txt call:options_make
+call:loading
 if exist debug.log del debug.log
+call:loading
 mode con:cols=130 lines=50
+call:loading
 call:internet
 call:url
 (
 set /p update_start=
 set /p news_start=
 )<%appdata%\.minecraft\select.txt
+call:loading
 call:verion_updater
-call:daily_news
+set progress_text=Loading
+call:loading
 title Minebatch %version% %mode%
-goto:EOF
+call:daily_news
+set/a ready=1
+set progress_text=Finishing
+call:loading
+goto menu
 
 :internet
-cls
-echo Loading...
-echo Checking internet connection...
+set progress_text=Checking internet connection
+call:loading
 Ping www.google.nl -n 1 -w 1000 >nul
 if errorlevel 1 (set internet=0) else (set internet=1)
 if %internet%==1 set mode=Online
@@ -1236,24 +1268,26 @@ cls
 goto:EOF
 
 :verion_updater
+set progress_text=Checking for updates
+call:loading
 if %internet%==0 goto:EOF
 if %update_start%==0 goto:EOF
-cls
-echo Loading...
-echo Checking for updates...
 if exist %appdata%\.minecraft\version.txt del %appdata%\.minecraft\version.txt
 timeout 2 /nobreak >nul
 curl -o %appdata%\.minecraft\version.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/version.txt" -L -s
+call:loading
 timeout 2 /nobreak >nul
 set /p new_version=<%appdata%\.minecraft\version.txt
 if %version%==%new_version% goto:EOF
+call:loading
 if exist %appdata%\.minecraft\news.txt del %appdata%\.minecraft\news.txt
 timeout 2 /nobreak >nul
+call:loading
 curl -o %appdata%\.minecraft\news.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/news.txt" -L -s
 cls
-echo A new version is available %new_version%
+echo A brand new version is available %new_version%
 echo.
-echo What's new in %new_version%:
+echo Three versions changelog:
 echo -----------------------------------------
 echo.
 type %appdata%\.minecraft\news.txt
@@ -1281,16 +1315,17 @@ start Minebatch_%new_version%.cmd
 exit
 
 :daily_news
+set progress_text=Downloading daily news
+call:loading
 if %internet%==0 goto:EOF
 if %news_start%==0 goto:EOF
-cls
-echo Loading...
-echo Daily news...
 echo.
 echo.
 echo.
 if exist %appdata%\.minecraft\message.txt del %appdata%\.minecraft\message.txt
+call:loading
 timeout 2 /nobreak >nul
+call:loading
 curl -o %appdata%\.minecraft\message.txt "https://raw.githubusercontent.com/Kotsasmin/Minebatch/main/message.txt" -L -s
 cls
 echo ----------------- Kotsasmin's daily news -----------------
@@ -1305,9 +1340,8 @@ pause
 goto:EOF
 
 :install
-cls
-echo Loading...
-echo Creating files...
+set progress_text=Creating files and directories
+call:loading
 echo.
 echo.
 echo.
