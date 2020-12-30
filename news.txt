@@ -1,6 +1,6 @@
 0.0.0.6.1
 + Fixed some silly bugs
-+ Added a graphical loading bar
++ Added a loading bar
 
 0.0.0.6.0
 + Fixed a lot of bugs
