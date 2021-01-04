@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.6.1
+set version=0.0.0.6.2
 title Minebatch %version%
 goto check
 :menu1
@@ -1006,7 +1006,7 @@ echo.
 choice /c 123 /n /m "Select: "
 if %errorlevel%==1 (start https://www.microsoft.com/en-us/download/details.aspx?id=35 & goto web2)
 if %errorlevel%==2 (start https://www.utorrent.com/ & goto web2)
-if %errorlevel%==3 (goto menu3)
+if %errorlevel%==3 (goto web1)
 
 :credits
 cls
