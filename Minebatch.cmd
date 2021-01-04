@@ -982,13 +982,13 @@ echo 7) Java's web page
 echo 8) Page 2
 echo 9) Back
 choice /c 123456789 /n /m "Select: "
-if %errorlevel%==1 (start http://kotsasmin.blogspot.com & goto web)
-if %errorlevel%==2 (start https://www.playfreeminecraft.nl/ & goto web)
-if %errorlevel%==3 (start https://tlauncher.org/ & goto web)
-if %errorlevel%==4 (start https://rexdl.com/ & goto web)
-if %errorlevel%==5 (start https://www.mcserversoft.com/ & goto web)
-if %errorlevel%==6 (start https://www.minecraft.net/en-us/ & goto web)
-if %errorlevel%==7 (start https://www.java.com/en/ & goto web)
+if %errorlevel%==1 (start http://kotsasmin.blogspot.com & goto web1)
+if %errorlevel%==2 (start https://www.playfreeminecraft.nl/ & goto web1)
+if %errorlevel%==3 (start https://tlauncher.org/ & goto web1)
+if %errorlevel%==4 (start https://rexdl.com/ & goto web1)
+if %errorlevel%==5 (start https://www.mcserversoft.com/ & goto web1)
+if %errorlevel%==6 (start https://www.minecraft.net/en-us/ & goto web1)
+if %errorlevel%==7 (start https://www.java.com/en/ & goto web1)
 if %errorlevel%==8 (goto web2)
 if %errorlevel%==9 (goto menu3)
 
@@ -1004,8 +1004,8 @@ echo.
 echo.
 echo.
 choice /c 123 /n /m "Select: "
-if %errorlevel%==1 (start https://www.microsoft.com/en-us/download/details.aspx?id=35 & goto web)
-if %errorlevel%==2 (start https://www.utorrent.com/ & goto web)
+if %errorlevel%==1 (start https://www.microsoft.com/en-us/download/details.aspx?id=35 & goto web2)
+if %errorlevel%==2 (start https://www.utorrent.com/ & goto web2)
 if %errorlevel%==3 (goto menu3)
 
 :credits
