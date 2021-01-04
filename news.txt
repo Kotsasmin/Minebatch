@@ -1,3 +1,6 @@
+0.0.0.6.2
++ Fixed some bugs
+
 0.0.0.6.1
 + Fixed some silly bugs
 + Added a loading bar
@@ -6,7 +9,3 @@
 + Fixed a lot of bugs
 + Added options menu
 + More!
-
-0.0.0.5.9
-+ Fixed some bugs
-+ Changed some commands
