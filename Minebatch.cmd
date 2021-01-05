@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.6.2
+set version=0.0.0.6.1
 title Minebatch %version%
 goto check
 :menu1
@@ -1191,6 +1191,7 @@ echo ------------------------------------------
 echo %load%
 echo ------------------------------------------
 ::echo %st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%%st%
+if exist debug.log del debug.log
 set/a loadnum=%loadnum% +1
 if %loadnum%==21 goto menu1
 if %ready%==1 goto loading
