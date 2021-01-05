@@ -1,5 +1,5 @@
 @echo off
-set version=0.0.0.6.1
+set version=0.0.0.6.2
 title Minebatch %version%
 goto check
 :menu1
