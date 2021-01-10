@@ -66,7 +66,7 @@ echo 1) Wep pages
 echo 2) Credits
 echo 3) Contact and info
 echo 4) Clean-up system
-echo 5) Kotsasmin's news
+echo 5) Minebatch's news
 echo 6) Extras for Minecraft Story Mode Seasons 1-2
 echo 7) Options
 echo 8) Page 2
