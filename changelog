@@ -1,13 +1,10 @@
 0.0.0.7.0
 + Changed the whole menu
 + Changed the design
-+ Added Offline Help support
-+ Changes the update system
++ Changed the update system
 + Added more options in each menu
 + Fixed a lot of bugs!
 + Changed the loading bar
-+ Changed Minecraft Story Mode download page
-+ Added unzip.exe file
 + Changed the storing folder from: %appdata%\.minecraft to %appdata%\.minecraft\minebatch
 
 0.0.0.6.2
